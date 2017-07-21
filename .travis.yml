@@ -3,3 +3,11 @@ node_js:
   - "8.0.0"
 env:
   CODECLIMATE_REPO_TOKEN: c1ce068b1ca3bae89f5f15f5a3e5fb25c8335f64df52caa16a1bcd3e3270ceac
+  global:
+    - CC_TEST_REPORTER_ID=c1ce068b1ca3bae89f5f15f5a3e5fb25c8335f64df52caa16a1bcd3e3270ceac
+    # - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+script:
+  - npm run test
