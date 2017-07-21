@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "test:watch": "nodemon --exec 'printf \"\\033\\143\";mocha'"
   },
   "author": "",
@@ -12,6 +12,7 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "mocha": "^3.4.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "nyc": "^11.0.3"
   }
 }
