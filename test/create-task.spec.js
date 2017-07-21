@@ -1,38 +1,30 @@
-const expect = require('expect.js');
+const expect = require("expect.js");
+const CreateTask = require("../src/create-task");
 
-const fakeUUIDGenerator = () => '1'
+const fakeUUIDGenerator = () => "1";
 
 function fakeClock() {
   return {
-    toISOString: () => '2017-07-19T03:55:26.055Z'
-  }
-}
-
-function CreateTask(Clock = Date, UUIDGenerator) {
-  return function({state, attributes}){
-    return {
-      name: 'TASK_CREATED',
-      date: new Clock().toISOString(),
-      attributes: {
-        uuid: UUIDGenerator(),
-        description: attributes.description
-      }
-    }
+    toISOString: () => "2017-07-19T03:55:26.055Z"
   };
 }
 
-describe('Create task', function() {
-  it('creates a new task', () => {
-    createTask = CreateTask(fakeClock, fakeUUIDGenerator);
+describe("Create task", () => {
+  it("creates a new task", () => {
+    const createTask = CreateTask(fakeClock, fakeUUIDGenerator);
 
-    const event = createTask({state: {}, attributes: {description: 'Buy fresh milk'}});
+    const event = createTask({
+      state: {},
+      attributes: { description: "Buy fresh milk" }
+    });
+
     expect(event).to.eql({
-      name: 'TASK_CREATED',
-      date: '2017-07-19T03:55:26.055Z',
+      name: "TASK_CREATED",
+      date: "2017-07-19T03:55:26.055Z",
       attributes: {
-        uuid: '1',
-        description: 'Buy fresh milk'
+        uuid: "1",
+        description: "Buy fresh milk"
       }
     });
-  })
+  });
 });
