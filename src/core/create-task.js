@@ -1,12 +1,14 @@
-'use strict';
+const CreateTask = require('./commands/create-task');
 
-module.exports = (Clock = Date, UUIDGenerator) => ({ state, attributes }) => {
-  return {
-    name: 'TASK_CREATED',
-    date: new Clock().toISOString(),
+module.exports = ({ store, uuidGenerator }) => attributes => {
+  const uuid = uuidGenerator();
+  const createTask = CreateTask();
+  const event = createTask({
     attributes: {
-      uuid: UUIDGenerator(),
+      uuid,
       description: attributes.description
     }
-  };
+  });
+  store.save(event);
+  return uuid;
 };

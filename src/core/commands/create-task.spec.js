@@ -1,7 +1,5 @@
 const expect = require('expect.js');
-const CreateTask = require(`${global.SRC}/core/create-task`);
-
-const fakeUUIDGenerator = () => '1';
+const CreateTask = require('./create-task');
 
 function fakeClock() {
   return {
@@ -9,20 +7,23 @@ function fakeClock() {
   };
 }
 
-describe('Create task', () => {
+describe('Commands - Create task', () => {
   it('creates a new task', () => {
-    const createTask = CreateTask(fakeClock, fakeUUIDGenerator);
+    const uuid = '1';
+    const createTask = CreateTask(fakeClock);
 
     const event = createTask({
-      state: {},
-      attributes: { description: 'Buy fresh milk' }
+      attributes: {
+        uuid,
+        description: 'Buy fresh milk'
+      }
     });
 
     expect(event).to.eql({
       name: 'TASK_CREATED',
       date: '2017-07-19T03:55:26.055Z',
       attributes: {
-        uuid: '1',
+        uuid,
         description: 'Buy fresh milk'
       }
     });
