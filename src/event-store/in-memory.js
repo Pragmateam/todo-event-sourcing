@@ -1,7 +1,17 @@
 'use strict';
 
 module.exports = function InMemoryStore(entries = []) {
+  const listeners = [];
   return {
-    save: entry => entries.push(entry)
+    save: event => {
+      entries.push(event);
+      listeners
+        .filter(listener => listener.eventName === event.name)
+        .forEach(listener => listener.listener(event));
+    },
+    subscribe: (eventName, listener) => {
+      if (entries.length) listener(entries);
+      listeners.push({ eventName, listener });
+    }
   };
 };
