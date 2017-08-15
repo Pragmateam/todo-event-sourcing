@@ -5,7 +5,7 @@ const InMemoryStore = require('../../event-store/in-memory');
 
 const uuidGenerator = () => '1';
 
-describe.only('Query - List All Tasks', () => {
+describe('Query - List All Tasks', () => {
   it('lists new tasks', () => {
     const store = new InMemoryStore();
 

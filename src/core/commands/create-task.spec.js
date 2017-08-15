@@ -9,10 +9,12 @@ function fakeClock() {
 
 describe('Commands - Create task', () => {
   it('creates a new task', () => {
+    const state = {};
     const uuid = '1';
     const createTask = CreateTask(fakeClock);
 
     const event = createTask({
+      state,
       attributes: {
         uuid,
         description: 'Buy fresh milk'

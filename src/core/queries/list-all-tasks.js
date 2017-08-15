@@ -9,9 +9,9 @@ module.exports = ({ store }) => {
   });
 
   // store.subscribe('TASK_DONE', event => {
-  //   const { uuid, status } = event.attributes;
+  //   const { uuid } = event.attributes;
   //   const task = task.find(task => (task.uuid = uuid));
-  //   task.status = status;
+  //   task.status = 'done';
   // });
 
   return () => tasks.slice(0);
