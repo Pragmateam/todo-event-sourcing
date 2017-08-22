@@ -13,7 +13,7 @@ describe('Commands - Do task', () => {
     const state = { uuid };
     const doTask = DoTask(fakeClock);
 
-    const either = doTask({
+    const result = doTask({
       state,
       attributes: {
         uuid
@@ -31,7 +31,7 @@ describe('Commands - Do task', () => {
       done();
     };
 
-    either.fold(onSuccess, done);
+    result.fold(done, onSuccess);
   });
 
   it('requires task to exist', done => {
@@ -39,7 +39,7 @@ describe('Commands - Do task', () => {
     const state = {};
     const doTask = DoTask(fakeClock);
 
-    const either = doTask({
+    const result = doTask({
       state,
       attributes: {
         uuid
@@ -51,6 +51,6 @@ describe('Commands - Do task', () => {
       done();
     };
 
-    either.fold(done, onError);
+    result.fold(onError, done);
   });
 });
