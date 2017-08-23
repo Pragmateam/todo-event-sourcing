@@ -13,9 +13,9 @@ describe('Use Case - Create Task', () => {
   it('assigns a UUID to the new task', () => {
     const store = new InMemoryStore();
     const createTask = CreateTask({ store, uuidGenerator });
-    const uuid = createTask({ description: 'Buy Milk' });
+    const result = createTask({ description: 'Buy Milk' });
 
-    expect(uuid).to.equal('1');
+    expect(result).to.eql(result.Success('1'));
   });
 
   it('creates a new task', () => {
