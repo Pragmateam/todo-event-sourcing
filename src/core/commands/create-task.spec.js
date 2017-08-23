@@ -21,8 +21,8 @@ describe('Commands - Create task', () => {
       }
     });
 
-    expect(result).to.eql(
-      result.Success({
+    result.fold(null, value =>
+      expect(value).to.eql({
         name: 'TASK_CREATED',
         date: '2017-07-19T03:55:26.055Z',
         attributes: {

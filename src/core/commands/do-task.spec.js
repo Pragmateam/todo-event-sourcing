@@ -20,8 +20,8 @@ describe('Commands - Do task', () => {
       }
     });
 
-    expect(result).to.eql(
-      result.Success({
+    result.fold(null, value =>
+      expect(value).to.eql({
         name: 'TASK_DONE',
         date: '2017-07-19T03:55:26.055Z',
         attributes: {
@@ -43,6 +43,6 @@ describe('Commands - Do task', () => {
       }
     });
 
-    expect(result).to.eql(result.Failure(['The task must exist!']));
+    result.fold(value => expect(value).to.eql(['The task must exist!']), null);
   });
 });

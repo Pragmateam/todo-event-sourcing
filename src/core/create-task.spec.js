@@ -1,5 +1,6 @@
 const expect = require('expect.js');
 const CreateTask = require('./create-task');
+const { Failure, Success } = require('data.validation');
 
 function InMemoryStore(entries = []) {
   return {
@@ -15,7 +16,7 @@ describe('Use Case - Create Task', () => {
     const createTask = CreateTask({ store, uuidGenerator });
     const result = createTask({ description: 'Buy Milk' });
 
-    expect(result).to.eql(result.Success('1'));
+    result.fold(null, value => expect(value).to.equal('1'));
   });
 
   it('creates a new task', () => {
