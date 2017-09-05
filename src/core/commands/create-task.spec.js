@@ -13,7 +13,7 @@ describe('Commands - Create task', () => {
     const uuid = '1';
     const createTask = CreateTask(fakeClock);
 
-    const event = createTask({
+    const result = createTask({
       state,
       attributes: {
         uuid,
@@ -21,13 +21,15 @@ describe('Commands - Create task', () => {
       }
     });
 
-    expect(event).to.eql({
-      name: 'TASK_CREATED',
-      date: '2017-07-19T03:55:26.055Z',
-      attributes: {
-        uuid,
-        description: 'Buy fresh milk'
-      }
-    });
+    result.fold(null, value =>
+      expect(value).to.eql({
+        name: 'TASK_CREATED',
+        date: '2017-07-19T03:55:26.055Z',
+        attributes: {
+          uuid,
+          description: 'Buy fresh milk'
+        }
+      })
+    );
   });
 });

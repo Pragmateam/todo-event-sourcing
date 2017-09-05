@@ -2,6 +2,7 @@
 
 const expect = require('expect.js');
 const request = require('supertest');
+const isUUID = require('isuuid');
 
 const InMemoryStore = require('../../event-store/in-memory');
 const store = new InMemoryStore();
@@ -17,7 +18,7 @@ describe('Controller - Create Task', () => {
       .expect(201)
       .end(function(error, response) {
         const task = response.body;
-        expect(task.uuid.length).not.to.be(0);
+        expect(isUUID(task.uuid)).to.be(true);
         done(error);
       });
   });

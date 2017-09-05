@@ -1,4 +1,9 @@
 module.exports = core => (req, res) => {
-  const uuid = core.createTask(req.body);
-  res.status(201).send({ uuid });
+  const result = core.createTask(req.body);
+  result.fold(
+    () => {},
+    uuid => {
+      res.status(201).send({ uuid });
+    }
+  );
 };
