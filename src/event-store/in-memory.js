@@ -12,6 +12,7 @@ module.exports = function InMemoryStore(entries = []) {
     subscribe: (eventName, listener) => {
       if (entries.length) listener(entries);
       listeners.push({ eventName, listener });
-    }
+    },
+    load: ({uuid}) => entries.filter(entry => entry.attributes.uuid === uuid)
   };
 };

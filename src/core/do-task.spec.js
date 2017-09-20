@@ -6,7 +6,7 @@ function InMemoryStore(entries = []) {
   return {
     save: entry => entries.push(entry),
     eventNames: () => entries.map(e => e.name),
-    load: () => entries
+    load: () => entries.slice(0)
   };
 }
 
@@ -19,6 +19,15 @@ describe('Use Case - Do Task', () => {
 
     const doTask = DoTask({ store });
     doTask({ uuid });
+    const taskDoneEvent = store.load().pop();
+
+    expect(taskDoneEvent).to.eql({
+      name: 'TASK_DONE',
+      attributes: {
+        uuid
+      }
+    });
+
     expect(store.eventNames()).to.eql(['TASK_CREATED', 'TASK_DONE']);
   });
 
@@ -35,7 +44,12 @@ describe('Use Case - Do Task', () => {
       const doTask = DoTask({ store });
       const result = doTask({ uuid: 'unknown' });
 
-      result.fold(value => expect(value).not.be.empty(), null);
+      result.fold(
+        value => expect(value).not.be.empty(),
+        () => {
+          throw new Error('value is not empty');
+        }
+      );
     });
   });
 });
