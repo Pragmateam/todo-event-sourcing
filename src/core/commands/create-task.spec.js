@@ -25,6 +25,7 @@ describe('Commands - Create task', () => {
       expect(value).to.eql({
         name: 'TASK_CREATED',
         date: '2017-07-19T03:55:26.055Z',
+        aggregateUUID: '1',
         attributes: {
           uuid,
           description: 'Buy fresh milk'

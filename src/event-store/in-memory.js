@@ -13,6 +13,6 @@ module.exports = function InMemoryStore(entries = []) {
       if (entries.length) listener(entries);
       listeners.push({ eventName, listener });
     },
-    load: ({uuid}) => entries.filter(entry => entry.attributes.uuid === uuid)
+    load: ({ uuid }) => entries.filter(event => event.aggregateUUID === uuid)
   };
 };
